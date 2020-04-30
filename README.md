@@ -45,9 +45,9 @@ Common object:
   - get current permission of a file
     - →[Is there a C function to get permissions of a file?](https://stackoverflow.com/questions/20238042/is-there-a-c-function-to-get-permissions-of-a-file)
     - →[How to read linux file permission programmatically in C/C++](https://stackoverflow.com/questions/8812959/how-to-read-linux-file-permission-programmatically-in-c-c)
-  - type, size.........^
-    - Above............||
-  - modified, accessed.||
-    - Above............||
+  - type, size......................^
+    - Above...................||
+  - modified, accessed...||
+    - Above...................||
 - info:
   - link
