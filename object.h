@@ -18,6 +18,6 @@ class object {
                 1: can not restore
             */
         };
-        char * create_archive() {};
-        char * rename(char * new_one) {};
+        int * create_archive() {};
+        int * rename(char * new_one) {};
 }
