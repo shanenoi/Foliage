@@ -1,11 +1,16 @@
 #include <string.h>
+#include <cstdlib>
+#include <cstdio>
+
+#ifndef OTHER_FUNCTIONS
+#define OTHER_FUNCTIONS
 
 class function {
 
     public:
-        char * concat(char * first_string, char * second_string) {
+        char* concat(char* first_string, char* second_string) {
             if (second_string != NULL) {
-                char * result_string = (char*) malloc(
+                char* result_string = (char*) malloc(
                     strlen(first_string) +
                     strlen(second_string) + 1
                 );
@@ -19,14 +24,10 @@ class function {
 
         };
 
-        char * join(char * item, char * array) {
-            return strdup;
-        }
-
-        char * process(char * command) {
+        char* process(const char* command) {
             FILE * fp;
             char path[1035];
-            char * result = strdup("");;
+            char* result = strdup("");;
 
             fp = popen(command, "r");
             if (fp == NULL) {
@@ -40,4 +41,19 @@ class function {
             return result;
         }
 
+        void gen_random(char *s, const int len) {
+            static const char alphanum[] =
+                "0123456789"
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "abcdefghijklmnopqrstuvwxyz";
+
+            for (int i = 0; i < len; ++i) {
+                s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
+            }
+
+            s[len] = 0;
+        }
+
 };
+
+#endif
