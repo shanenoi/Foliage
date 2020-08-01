@@ -1,6 +1,7 @@
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
+selected_file=$1
 
 test_files=$(find . | grep "test.*.cpp")
 
@@ -13,8 +14,16 @@ do
 	current_dict=$(cd -)
 	
 	g++ $(basename ${test}) -o ./a.out;
-	./a.out >> $current_dict/test_output
-	return_code=$?
+
+	if [ "$(basename ${test})" = "$selected_file" ]
+	then
+		./a.out
+		return_code=$?
+	else
+		./a.out >> $current_dict/test_output
+		return_code=$?
+	fi
+
 	rm a.out
 	cd $current_dict
 
