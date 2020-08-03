@@ -21,9 +21,18 @@ void test_manager() {
 	
 	m.selected_files.push_back(a);
 	m.selected_files.push_back(b);
+
+	// m.open();
+	// printf("open: %s", m.present_status.message);
 	
-	m.cut();
-	m.paste();
+	// m.cut();
+	// printf("cut: %s\n", m.present_status.message);
+	// m.paste();
+	// printf("paste: %s\n", m.present_status.message);
+	// m.copy();
+	// printf("copy: %s\n", m.present_status.message);
+	// m.paste();
+	// printf("paste: %s\n", m.present_status.message);
 
 }
 

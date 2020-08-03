@@ -3,7 +3,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 selected_file=$1
 
-test_files=$(find . | grep "test.*.cpp")
+test_files=$(find $(pwd) | grep "test.*.cpp")
 
 echo '' > test_output
 
@@ -29,9 +29,9 @@ do
 
 	if [[ $return_code -eq 0 ]]
 	then
-		printf "${BLUE}\n[ PASS ]\n\n${NC}"
+		printf "${BLUE}\n \e[1m[ PASS ]\n\n${NC}"
 	else
-		printf "${YELLOW}\n[ STUCK ]\n\n${NC}"
+		printf "${YELLOW}\n \e[1m[ STUCK ]\n\n${NC}"
 	fi
 
 done

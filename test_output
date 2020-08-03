@@ -2,9 +2,7 @@
 0-ddd
 
 fa37Jnchello world
-===1862===rw-rw-r--===./object.h: C++ source, ASCII text
-===1596306242===1596306243===1596306242
-  adding: archive_app.h (deflated 81%)
+  adding: archive_app.h (deflated 80%)
 Archive:  out.zip
   inflating: archive_app.h           
 
@@ -12,7 +10,7 @@ Archive:  out.zip
 p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,4 CPUs Intel(R) Core(TM) i3-8145U CPU @ 2.10GHz (806EC),ASM,AES-NI)
 
 Scanning the drive:
-1 file, 2745 bytes (3 KiB)
+1 file, 2662 bytes (3 KiB)
 
 Creating archive: out.7z
 
@@ -20,20 +18,20 @@ Items to compress: 1
 
 
 Files read from disk: 1
-Archive size: 658 bytes (1 KiB)
+Archive size: 666 bytes (1 KiB)
 Everything is Ok
 
 7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
 p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,4 CPUs Intel(R) Core(TM) i3-8145U CPU @ 2.10GHz (806EC),ASM,AES-NI)
 
 Scanning the drive for archives:
-1 file, 658 bytes (1 KiB)
+1 file, 666 bytes (1 KiB)
 
 Extracting archive: out.7z
 --
 Path = out.7z
 Type = 7z
-Physical Size = 658
+Physical Size = 666
 Headers Size = 130
 Method = LZMA2:12
 Solid = -
@@ -41,5 +39,5 @@ Blocks = 1
 
 Everything is Ok
 
-Size:       2745
-Compressed: 658
+Size:       2662
+Compressed: 666

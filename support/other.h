@@ -67,10 +67,7 @@ class function {
                     *(temp_string+index++) = chr;
                 fclose(file);
             }
-            result = {
-                .code = code,
-                .message = temp_string,
-            };
+            result = {.code = code, .message = temp_string};
             system("rm .temp_file3264111");
             return result;
 

@@ -35,10 +35,11 @@ class object {
         size_t size;
         char* permissions;
         char* type_content;
+        status_return present_status = {.code=EX_OK, .message=NULL};
 
         object(meta_path);
 
-        status_return open(char * arg);
+        virtual void open(){};
 
 };
 
@@ -57,27 +58,15 @@ object::object(meta_path path):path(path) {
     if (stat_status == 0) {
         //object::permissions = (char* ) malloc(sizeof(char) * 9 + 1);
         mode_t perm = object::st.st_mode;
-        const char permissions[] = {
-            (perm & S_IRUSR) ? 'r' : '-',
-            (perm & S_IWUSR) ? 'w' : '-',
-            (perm & S_IXUSR) ? 'x' : '-',
-            (perm & S_IRGRP) ? 'r' : '-',
-            (perm & S_IWGRP) ? 'w' : '-',
-            (perm & S_IXGRP) ? 'x' : '-',
-            (perm & S_IROTH) ? 'r' : '-',
-            (perm & S_IWOTH) ? 'w' : '-',
-            (perm & S_IXOTH) ? 'x' : '-',
-            '\0',
-        };
+        const char permissions[] = {(perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-', (perm & S_IXUSR) ? 'x' : '-',
+                                    (perm & S_IRGRP) ? 'r' : '-', (perm & S_IWGRP) ? 'w' : '-', (perm & S_IXGRP) ? 'x' : '-',
+                                    (perm & S_IROTH) ? 'r' : '-', (perm & S_IWOTH) ? 'w' : '-', (perm & S_IXOTH) ? 'x' : '-',
+                                    '\0',};
         object::permissions = strdup(permissions);
     }
 
     char* file_command = strdup("file ");
-    object::type_content = strdup(
-        object::func->process(
-            strcat(file_command, object::__full)
-        ).message
-    );
+    object::type_content = strdup(object::func->process(strcat(file_command, object::__full)).message);
 
 };
 
