@@ -1,10 +1,9 @@
-#include <string.h>
+#ifndef __ARCHIVE__
+#define __ARCHIVE__
+
 #include <cstdlib>
-#include <cstdio>
-
-#ifndef ARCHIVEAPP
-#define ARCHIVEAPP
-
+#include <stdio.h>
+#include "file.hpp"
 
 class archive_format {
 
@@ -81,5 +80,10 @@ class seven_zip: public archive_format {
         }
 };
 
+void* archive_open(char* path, char** start, char** end) {
+    // this function will interac with file
+    printf("open %s\n", path);
+    return NULL;
+}
 
-#endif
+#endif __ARCHIVE__

@@ -1,5 +1,5 @@
-#include "file_manager.h"
-#include "object/object.h"
+#include "file_manager.hpp"
+#include "object/object.hpp"
 #include <iostream>
 
 using namespace std;

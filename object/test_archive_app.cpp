@@ -1,8 +1,8 @@
-#include "archive_app.h"
+#include "archive.hpp"
 
 void test_archive_app_zip() {
 	zip a;
-	a.input_files = "archive_app.h";
+	a.input_files = "archive.hpp";
 	a.output_file = "out";
 	a.compress();
 	a.extract("out.zip");
@@ -11,7 +11,7 @@ void test_archive_app_zip() {
 
 void test_archive_app_seven_zip() {
 	seven_zip a;
-	a.input_files = "archive_app.h";
+	a.input_files = "archive.hpp";
 	a.output_file = "out";
 	a.compress();
 	a.extract("out.7z");

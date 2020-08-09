@@ -1,4 +1,4 @@
-#include "object.h"
+#include "object.hpp"
 #include <iostream>
 
 using namespace std;
@@ -21,22 +21,7 @@ void test_object() {
 
 }
 
-class a: public object {
-	public:
-		a(meta_path);
-		virtual void open();
-};
-
-void a::open() {
-	cout << "file is readly open!";
-}
-
 int main(int argc, char const *argv[]) {
 	test_object();
-	meta_path cc = {
-		.path = ".",
-		.name = "object.h",
-	};
-	object b = a(cc);
 	return 0;
 }

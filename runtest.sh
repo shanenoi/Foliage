@@ -1,30 +1,26 @@
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+GRAY='\033[1;30m'; YELLOW='\033[1;33m'
+BLUE='\033[0;34m'; NC='\033[0m'
+
 selected_file=$1
 
 test_files=$(find $(pwd) | grep "test.*.cpp")
 
 echo '' > test_output
 
-for test in $test_files;
-do
+for test in $test_files; do
 	cd $(dirname ${test})
-	echo -e "> [ Run Test $test ]"
+	printf "> [ Run Test ${GRAY}${test}${NC} ]\n"
 	current_dict=$(cd -)
-	
-	g++ $(basename ${test}) -o ./a.out;
-
-	if [ "$(basename ${test})" = "$selected_file" ]
+	bname=$(basename ${test})
+	if [ "$bname" = "$selected_file" ]
 	then
-		./a.out
+		g++ $bname -o ./$bname.out && ./$bname.out && rm ./a.out
 		return_code=$?
 	else
-		./a.out >> $current_dict/test_output
+		g++ $bname -o ./a.out && ./a.out >> $current_dict/test_output && rm ./a.out
 		return_code=$?
 	fi
 
-	rm a.out
 	cd $current_dict
 
 	if [[ $return_code -eq 0 ]]

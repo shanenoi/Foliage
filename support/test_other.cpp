@@ -1,4 +1,4 @@
-#include "other.h"
+#include "other.hpp"
 #include <iostream>
 
 void test_process(function* func) {

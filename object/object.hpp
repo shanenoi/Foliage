@@ -1,19 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
+#ifndef __PATH_OBJECT__
+#define __PATH_OBJECT__
+
 #include <sys/stat.h>
-#include "../support/other.h"
-
-#ifndef PATH_OBJECT
-#define PATH_OBJECT
-
-typedef struct {
-
-    const char* path;
-    const char* name;
-
-} meta_path;
+#include <string.h>
+#include "file.hpp"
+#include "../support/other.hpp"
 
 
 typedef struct stat _stat;
@@ -36,12 +27,11 @@ class object {
         char* permissions;
         char* type_content;
         status_return present_status = {.code=EX_OK, .message=NULL};
-
+        void* (*open)(char* /*path*/, char** /*start*/, char** /*end*/);
         object(meta_path);
 
-        virtual void open(){};
-
 };
+
 
 object::object(meta_path path):path(path) {
 

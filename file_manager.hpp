@@ -1,5 +1,5 @@
-#include "support/other.h"
-#include "object/object.h"
+#include "support/other.hpp"
+#include "object/file.hpp"
 #include "status/status.h"
 #include <vector>
 
@@ -79,8 +79,8 @@ class manager {
         status_return create_new_blank_file();
 
         void open() {
-            this->selected_files[0].open();
-            this->present_status = this->selected_files[0].present_status;
+            // this->selected_files[0].open();
+            // this->present_status = this->selected_files[0].present_status;
         }
         
         status_return delt();
