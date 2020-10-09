@@ -1,18 +1,17 @@
-
+mv ./runtest.sh ./test_output .
+paste: NULL
 0-ddd
 
 fa37Jnchello world
-===140699582320072======./object.h: cannot open `./object.h' (No such file or directory)
-===140699581500756===140699582320072===140699582320352
-  adding: archive_app.hpp (deflated 80%)
+1187  adding: code.hpp (deflated 24%)
 Archive:  out.zip
-  inflating: archive_app.hpp         
+  inflating: code.hpp                
 
 7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
 p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,4 CPUs Intel(R) Core(TM) i3-8145U CPU @ 2.10GHz (806EC),ASM,AES-NI)
 
 Scanning the drive:
-1 file, 2662 bytes (3 KiB)
+1 file, 217 bytes (1 KiB)
 
 Creating archive: out.7z
 
@@ -20,26 +19,27 @@ Items to compress: 1
 
 
 Files read from disk: 1
-Archive size: 677 bytes (1 KiB)
+Archive size: 306 bytes (1 KiB)
 Everything is Ok
 
 7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
 p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,4 CPUs Intel(R) Core(TM) i3-8145U CPU @ 2.10GHz (806EC),ASM,AES-NI)
 
 Scanning the drive for archives:
-1 file, 677 bytes (1 KiB)
+1 file, 306 bytes (1 KiB)
 
 Extracting archive: out.7z
 --
 Path = out.7z
 Type = 7z
-Physical Size = 677
-Headers Size = 138
+Physical Size = 306
+Headers Size = 122
 Method = LZMA2:12
 Solid = -
 Blocks = 1
 
 Everything is Ok
 
-Size:       2662
-Compressed: 677
+Size:       217
+Compressed: 306
+===1======549183589===0===4295032831===640

@@ -1,0 +1,7 @@
+#ifndef __VAR__
+#define __VAR__
+
+#define PWD "./"
+#define FILETEMPLATES PWD "templates/"
+
+#endif /*__VAR__*/

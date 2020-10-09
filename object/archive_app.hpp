@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "file.hpp"
 
-class archive_format {
+class ArchiveFormat {
 
     public:
         const char* app_name;
@@ -14,7 +14,7 @@ class archive_format {
         const char* output_file;
         char* temporary_var;
 
-        ~archive_format() {free(this->temporary_var);}
+        ~ArchiveFormat() {free(this->temporary_var);}
 
         int check_available() {return system(this->app_name);}
 
@@ -24,7 +24,7 @@ class archive_format {
 };
 
 
-class zip: public archive_format {
+class Zip: public ArchiveFormat {
 
     public:
 
@@ -55,7 +55,7 @@ class zip: public archive_format {
 };
 
 
-class seven_zip: public archive_format {
+class SevenZip: public ArchiveFormat {
     public:
 
         int compress() {
@@ -80,7 +80,7 @@ class seven_zip: public archive_format {
         }
 };
 
-class rar: public archive_format {
+class Rar: public ArchiveFormat {
 
     public:
 

@@ -14,12 +14,7 @@
 #define __META_PATH__
 
 
-typedef struct {
-
-    const char* path;
-    const char* name;
-
-} meta_path;
+typedef struct {const char* path; const char* name;} meta_path;
 
 
 #endif /*__META_PATH__*/
@@ -32,7 +27,7 @@ typedef struct {
 #include <stdio.h> 
 #include "types.hpp"
 
-class detecter {
+class Detecter {
 
     private:
     
@@ -45,8 +40,8 @@ class detecter {
         const char *file;
         char *extension = (char*)malloc(sizeof(char)*9);
 
-        detecter() {init_type();}
-        ~detecter() {free(this->stor);
+        Detecter() {init_type();}
+        ~Detecter() {free(this->stor);
                      free_type();}
         char *get_extension();
         int compare(int*, int, int*);
@@ -80,25 +75,32 @@ class detecter {
             return TXT;
         }
 
+        void __test_read() {this->read();}
+
 };
 
-char *detecter::get_extension() {
-    detecter::extension = strdup("");
+
+char *Detecter::get_extension() {
+    Detecter::extension = strdup("");
     char buff[2] = {' ', '\0'};
-    int len_file_name = strlen(detecter::file);
+    int len_file_name = strlen(Detecter::file);
     for (int i=len_file_name-1; i!=0; i--) {
-        if (detecter::file[i]=='.' or detecter::file[i]=='/') break;
-        buff[0] = detecter::file[i];
-        detecter::extension = strcat(strdup(buff), detecter::extension);
+        if (Detecter::file[i]=='.' or Detecter::file[i]=='/') break;
+        buff[0] = Detecter::file[i];
+        Detecter::extension = strcat(strdup(buff), Detecter::extension);
     }   
-    return detecter::extension;
+    return Detecter::extension;
 }
 
-int detecter::compare(int *header, int len_header, int *str2) {
+
+int Detecter::compare(int *header, int len_header, int *str2) {
     for(int i=0; i<len_header; i++) {
         if (header[i] != str2[i]) {return 0;}
     }
     return 1;
 }
+
+
+static Detecter* DETECTER = new Detecter();
 
 #endif /*__DETECT_TYPE__*/

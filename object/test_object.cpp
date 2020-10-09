@@ -8,9 +8,9 @@ void test_object() {
 		.path = ".",
 		.name = "object.h",
 	};
-	object test_file = object(a);
+	Object test_file = Object(a);
 	printf(
-		"===%ld===%s===%s===%ld===%ld===%ld\n",
+		"===%ld===%s===%d===%ld===%ld===%ld\n",
 		test_file.size,
 		test_file.permissions,
 		test_file.type_content,

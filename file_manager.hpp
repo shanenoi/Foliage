@@ -1,41 +1,52 @@
+#ifndef FILE_MANAGER
+#define FILE_MANAGER
+
+#include "global.var"
 #include "support/other.hpp"
 #include "object/file.hpp"
 #include "status/status.h"
 #include <vector>
 
-#ifndef FILE_MANAGER
-#define FILE_MANAGER
 
-class manager {
+class Template {
 
-    public: //private default
+//    public:
 
-        struct __action_command {
-            char* name;
-            char* command;
-        };
-        __action_command action_copy = {.name = strdup("copy"), .command = strdup("cp -r ")};
-        __action_command action_cut = {.name = strdup("cut"), .command = strdup("mv ")};
+};
 
-        char* current_action;
-        function* func;
-        std::vector<object> virtual_clipboard;
+
+class Manager {
+
+
+    public: // private default | open public for debugging easily
+
+        struct __action_command {char* name; char* command;};
+
+        __action_command action_copy = {.name = strdup("copy"), 
+                                        .command = strdup("cp -r ")};
+        __action_command action_cut = {.name = strdup("cut"), 
+                                       .command = strdup("mv ")};
+
+        struct __action_command current_action;
+        Function* func;
+        std::vector<Object> virtual_clipboard;
 
 
     public:
 
         const char* current_path;
-        std::vector<object> selected_files;
+        std::vector<Object> selected_files;
         status_return present_status = {.code=EX_OK, .message=NULL};
 
 
-    public: // private default
+    public: // private default | open public for debugging easily
 
-        void* __transfer_clipboard_(char* action) {
+        void* __transfer_clipboard_(struct __action_command action) {
 
             if (this->selected_files.size() == 0) {
-                this->present_status = (status_return){.code=EX_IOERR, 
-                                                       .message="selected files not found!"};
+                this->present_status = (status_return){
+                                        .code=EX_IOERR, 
+                                        .message="selected files not found!"};
                 return NULL;
             }
 
@@ -54,56 +65,70 @@ class manager {
 
         }
 
-        void* __paste_(char* action) {
-            char * command = action;
+    
+        void* __paste_(struct __action_command action) {
+
+            char * command = action.command;
             int len_virtual_clipboard = this->virtual_clipboard.size();
             
             for (int i=0; i<len_virtual_clipboard; i++) {
-                command = strcat(command, strcat(this->virtual_clipboard[i].__full, strdup(" ")));
+                this->virtual_clipboard[i].load_details();
+                command = strcat(command, 
+                                 strcat(this->virtual_clipboard[i].__full, 
+                                        strdup(" ")));
             }
             command = strcat(command, this->current_path);
             printf("%s\n", command);
-            // this->clean_clipboard();
-            /*return func->process(command);*/
-            /**/
-            this->present_status = (status_return){.code=EX_OK, .message="NULL"};
+
+            /* this->present_status = func->process(command);*/
+            /* start demo mode */
+            this->present_status = (status_return){.code=EX_OK, 
+                                                   .message="NULL"};
+            /* end demo mode */
 
             return NULL; // exit
-            /**/
+
         }
 
 
     public:
 
-        manager(const char* current_path): current_path(strdup(current_path)){};
-        status_return create_new_blank_file();
+        Manager(const char* current_path): current_path(strdup(current_path)){};
+        void create_new_blank_file();
+        void* notify();
 
-        void open() {
-            // this->selected_files[0].open();
-            // this->present_status = this->selected_files[0].present_status;
-        }
+
+        void* open();
         
         status_return delt();
         status_return create_archive();
         
-        void copy() {this->__transfer_clipboard_(this->action_copy.name);}
+        void copy() {this->__transfer_clipboard_(this->action_copy);}
         
-        void cut() {this->__transfer_clipboard_(this->action_cut.name);}
+        void cut() {this->__transfer_clipboard_(this->action_cut);}
 
         void* paste() {
             if (this->virtual_clipboard.size() == 0) {
                 
                 this->present_status = (status_return){
                     .code=EX__BASE, 
-                    .message="paste ur fukg brain here!\ndid u copy or cut any thing?"};
+                    .message="paste ur fukg brain here!\n"
+                             "did u copy or cut any thing?"};
+                
+                /* Trigger */
+                this->notify();
+                return NULL;
 
-            } else if (strcmp(this->current_action, this->action_copy.name) == 0) {
+
+            } else if (strcmp(this->current_action.name, 
+                              this->action_copy.name) == 0) {
                 
-                this->__paste_(this->action_copy.command);
+                this->__paste_(this->action_copy);
                 
-            } else if (strcmp(this->current_action, this->action_cut.name) == 0) {
+            } else if (strcmp(this->current_action.name,
+                              this->action_cut.name) == 0) {
                 
-                this->__paste_(this->action_cut.command);
+                this->__paste_(this->action_cut);
                 this->selected_files.clear();
                 this->virtual_clipboard.clear();
 
@@ -112,6 +137,24 @@ class manager {
         };
         
 };
+
+
+void* Manager::notify() {
+    /* Console mode */
+    printf("<-->\n"
+           "Exit code: %d\n"
+           "Message: `%s`\n"
+           "<-->\n",
+           Manager::present_status.code,
+           Manager::present_status.message
+    );
+    return NULL;
+}
+
+void* Manager::open() {
+    /* open first selected file in vector selected_files */
+    return NULL;
+}
 
 
 #endif

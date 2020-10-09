@@ -6,7 +6,7 @@
 #ifndef OTHER_FUNCTIONS
 #define OTHER_FUNCTIONS 
 
-class function {
+class Function {
 
     public:
 

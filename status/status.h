@@ -1,11 +1,11 @@
 #include <sysexits.h>
 
-#ifndef STATUS
-#define STATUS
+#ifndef __STATUS__
+#define __STATUS__
 
 typedef struct {
 	int code;
 	const char* message;
 } status_return;
 
-#endif
+#endif /*__STATUS__*/

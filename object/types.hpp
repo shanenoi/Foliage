@@ -218,6 +218,8 @@ int *init(int len, ...) {
 static struct type_file DEFAULT[128];
 static int DEFAULT_LEN = 0;
 
+
+/* File types Defination */
 void init_type() {
     DEFAULT[0]  = {.name = ZIP,       .len=2,  .header = init(2, 80, 75)},
     DEFAULT[1]  = {.name = TAR_GZ,    .len=2,  .header = init(2, 31, 139)},

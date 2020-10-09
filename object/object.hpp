@@ -1,5 +1,5 @@
-#ifndef __PATH_OBJECT__
-#define __PATH_OBJECT__
+#ifndef __PATH_Object__
+#define __PATH_Object__
 
 #include <sys/stat.h>
 #include <string.h>
@@ -9,11 +9,11 @@
 
 typedef struct stat _stat;
 
-class object {
+class Object {
 
     private:
         _stat st;
-        function* func;
+        Function* func;
 
 
     public:
@@ -25,38 +25,42 @@ class object {
         time_t status;
         size_t size;
         char* permissions;
-        char* type_content;
+        enum TYPES type_content;
         status_return present_status = {.code=EX_OK, .message=NULL};
         void* (*open)(char* /*path*/, char** /*start*/, char** /*end*/);
-        object(meta_path);
+        Object(meta_path path):path(path){};
+        void load_details();
 
 };
 
 
-object::object(meta_path path):path(path) {
+void Object::load_details() {
 
-    object::__full = strdup(path.path);
-    object::__full = strcat(strcat(object::__full, "/"), path.name);
+    Object::__full = strcat( strcat(strdup(Object::path.path), strdup("/")),
+                             strdup(Object::path.name));
     
-    int stat_status = stat(object::__full, &(object::st));
+    int stat_status = stat(Object::__full, &(Object::st));
 
-    object::modified = object::st.st_mtime;
-    object::accessed = object::st.st_atime;
-    object::status = object::st.st_ctime;
-    object::size = object::st.st_size;
+    Object::modified = Object::st.st_mtime;
+    Object::accessed = Object::st.st_atime;
+    Object::status   = Object::st.st_ctime;
+    Object::size     = Object::st.st_size;
 
     if (stat_status == 0) {
-        //object::permissions = (char* ) malloc(sizeof(char) * 9 + 1);
-        mode_t perm = object::st.st_mode;
-        const char permissions[] = {(perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-', (perm & S_IXUSR) ? 'x' : '-',
-                                    (perm & S_IRGRP) ? 'r' : '-', (perm & S_IWGRP) ? 'w' : '-', (perm & S_IXGRP) ? 'x' : '-',
-                                    (perm & S_IROTH) ? 'r' : '-', (perm & S_IWOTH) ? 'w' : '-', (perm & S_IXOTH) ? 'x' : '-',
-                                    '\0',};
-        object::permissions = strdup(permissions);
+        //Object::permissions = (char* ) malloc(sizeof(char) * 9 + 1);
+        mode_t perm = Object::st.st_mode;
+        const char permissions[] = {
+                (perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-',
+                (perm & S_IXUSR) ? 'x' : '-', (perm & S_IRGRP) ? 'r' : '-',
+                (perm & S_IWGRP) ? 'w' : '-', (perm & S_IXGRP) ? 'x' : '-',
+                (perm & S_IROTH) ? 'r' : '-', (perm & S_IWOTH) ? 'w' : '-',
+                (perm & S_IXOTH) ? 'x' : '-', '\0',};
+        Object::permissions = strdup(permissions);
     }
 
-    char* file_command = strdup("file ");
-    object::type_content = strdup(object::func->process(strcat(file_command, object::__full)).message);
+    DETECTER->file = Object::path.path;
+    Object::type_content = DETECTER->astype();
+
 
 };
 
